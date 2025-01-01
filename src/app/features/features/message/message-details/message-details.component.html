@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Message Details</h2>
+<mat-dialog-content>
+  <div *ngIf="message">
+    <p><strong>ID:</strong> {{ message.id }}</p>
+    <p><strong>Content:</strong> {{ message.content }}</p>
+    <p><strong>Sender:</strong> {{ message.sender }}</p>
+    <p><strong>Receiver:</strong> {{ message.receiver }}</p>
+    <p><strong>Timestamp:</strong> {{ message.timestamp }}</p>
+  </div>
+  <div *ngIf="!message">
+    <p>Loading...</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>
+

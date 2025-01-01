@@ -1,0 +1,44 @@
+<mat-card>
+    <mat-card-title>Ajouter un Partenaire</mat-card-title>
+    <form (ngSubmit)="addPartner()">
+      <mat-form-field appearance="fill">
+        <mat-label>Alias</mat-label>
+        <input matInput [(ngModel)]="partner.alias" name="alias" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <input matInput [(ngModel)]="partner.type" name="type" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Direction</mat-label>
+        <mat-select [(ngModel)]="partner.direction" name="direction" required>
+          <mat-option value="INBOUND">INBOUND</mat-option>
+          <mat-option value="OUTBOUND">OUTBOUND</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Application</mat-label>
+        <input matInput [(ngModel)]="partner.application" name="application">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Processed Flow Type</mat-label>
+        <mat-select [(ngModel)]="partner.processedFlowType" name="processedFlowType" required>
+          <mat-option value="MESSAGE">MESSAGE</mat-option>
+          <mat-option value="ALERTING">ALERTING</mat-option>
+          <mat-option value="NOTIFICATION">NOTIFICATION</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="partner.description" name="description" required></textarea>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Ajouter</button>
+    </form>
+  </mat-card>
+  

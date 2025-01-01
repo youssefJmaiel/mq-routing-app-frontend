@@ -1,0 +1,30 @@
+<div class="message-form-container">
+    <mat-card-title>Ajouter un message</mat-card-title>
+
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Expéditeur</mat-label>
+        <input matInput id="sender" formControlName="sender" placeholder="Entrez l'expéditeur" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Destinataire</mat-label>
+        <input matInput id="receiver" formControlName="receiver" placeholder="Entrez le destinataire" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Contenu</mat-label>
+        <textarea matInput id="content" formControlName="content" placeholder="Entrez le contenu du message"></textarea>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Date et Heure</mat-label>
+        <input matInput id="timestamp" formControlName="timestamp" type="datetime-local" />
+      </mat-form-field>
+  
+      <mat-checkbox formControlName="processed">Message traité</mat-checkbox>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="messageForm.invalid">Ajouter le message</button>
+    </form>
+  </div>
+  
