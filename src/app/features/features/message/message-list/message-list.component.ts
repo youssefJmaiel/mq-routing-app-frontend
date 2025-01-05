@@ -86,16 +86,29 @@ export class MessageListComponent implements OnInit {
     }
   }
 
+  // openMessageUpdate(message: any): void {
+  //   const dialogRef = this.dialog.open(MessageUpdateComponent, {
+  //     width: '500px',
+  //     data: { message: message }, // Pass the message to be updated
+  //   });
+
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     if (result) {
+  //       this.loadMessages(); // Reload the list after update
+  //     }
+  //   });
+  // }
   openMessageUpdate(message: any): void {
     const dialogRef = this.dialog.open(MessageUpdateComponent, {
       width: '500px',
-      data: { message: message }, // Pass the message to be updated
+      data: { message: message }  // Pass the entire message object
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.loadMessages(); // Reload the list after update
       }
     });
   }
+  
 }

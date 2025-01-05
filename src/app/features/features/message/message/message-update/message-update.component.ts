@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from '../../../../../services/message-service.service';
 import { Message } from '../../../../../model/message.model';
@@ -11,62 +12,39 @@ import { Message } from '../../../../../model/message.model';
 })
 export class MessageUpdateComponent implements OnInit {
   messageForm!: FormGroup;
-  messageId: string | null = null;
+  messageId: number | null = null;  // id should be a number
 
   constructor(
     private messageService: MessageService,
     private route: ActivatedRoute,
-    private router: Router // Injecting Router service
+    private router: Router,
+    public dialogRef: MatDialogRef<MessageUpdateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { message: Message }  // Inject data passed through dialog
   ) {}
 
   ngOnInit(): void {
-    // Retrieve the ID from the URL
-    this.messageId = this.route.snapshot.paramMap.get('id');
-
-    if (!this.messageId) {
-      console.error("L'ID est manquant dans l'URL");
+    if (this.data?.message) {
+      this.messageId = this.data.message.id;  // Set the message ID from the passed data
+      this.messageForm = new FormGroup({
+        sender: new FormControl(this.data.message.sender, Validators.required),
+        receiver: new FormControl(this.data.message.receiver, Validators.required),
+        timestamp: new FormControl(this.data.message.timestamp, Validators.required),
+        processed: new FormControl(this.data.message.processed),
+        content: new FormControl(this.data.message.content, Validators.required),
+      });
     } else {
-      console.log("ID récupéré :", this.messageId);
-      // Load message data here using the ID
-      this.getMessageDetails(Number(this.messageId)); // Convert string to number
+      console.error("Message data is missing");
     }
-
-    // Initialize the form
-    this.messageForm = new FormGroup({
-      sender: new FormControl('', Validators.required),
-      receiver: new FormControl('', Validators.required),
-      timestamp: new FormControl('', Validators.required),
-      processed: new FormControl(false),
-      content: new FormControl('', Validators.required),
-    });
-  }
-
-  getMessageDetails(id: number): void {
-    this.messageService.getMessageById(id).subscribe((message: Message) => {
-      if (message) {
-        this.messageForm.patchValue({
-          sender: message.sender,
-          receiver: message.receiver,
-          timestamp: message.timestamp,
-          processed: message.processed,
-          content: message.content,
-        });
-      } else {
-        console.error('Message non trouvé');
-      }
-    });
   }
 
   onSubmit(): void {
-    if (this.messageForm.valid && this.messageId) {
-      const updatedMessage = { ...this.messageForm.value, id: Number(this.messageId) };
+    if (this.messageForm.valid && this.messageId !== null) {
+      const updatedMessage = { ...this.messageForm.value, id: this.messageId };
 
-      this.messageService.updateMessage(Number(this.messageId), updatedMessage).subscribe(
+      this.messageService.updateMessage(this.messageId, updatedMessage).subscribe(
         response => {
           console.log('Message mis à jour avec succès', response);
-
-          // Navigate to the message list after update
-          this.router.navigate(['/messages']);
+          this.dialogRef.close(true); // Close dialog and return true to reload the message list
         },
         error => {
           console.error('Erreur lors de la mise à jour du message', error);

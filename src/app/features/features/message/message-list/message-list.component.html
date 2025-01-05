@@ -37,10 +37,10 @@
         <button mat-button color="warn" (click)="deleteMessage(message.id)">
           Supprimer
         </button>
-        <!-- <button mat-button color="primary" (click)="openMessageUpdate(message)">Mettre à jour</button> -->
-        <button mat-button color="primary" [routerLink]="['/message/update', message.id]">
+        <button mat-button color="primary" (click)="openMessageUpdate(message)">Mettre à jour</button>
+        <!-- <button mat-button color="primary" [routerLink]="['/message/update', message.id]">
           Mettre à jour
-        </button>
+        </button> -->
         
       </mat-cell>
     </ng-container>
