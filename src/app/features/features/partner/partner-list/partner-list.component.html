@@ -29,6 +29,7 @@
         <mat-cell *matCellDef="let partner">
           <button mat-button color="primary" (click)="openPartnerDetails(partner)">Détails</button>
           <button mat-button color="warn" (click)="deletePartner(partner.id)">Supprimer</button>
+          <button mat-button color="accent" (click)="updatePartner(partner)">Edit</button>
         </mat-cell>
       </ng-container>
   

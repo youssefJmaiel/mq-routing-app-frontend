@@ -1,0 +1,36 @@
+<div class="message-update-container">
+    <h2>Update Message</h2>
+  
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Sender</mat-label>
+        <input matInput id="sender" formControlName="sender" placeholder="Enter the sender's name" />
+        <mat-error *ngIf="messageForm.get('sender')?.hasError('required')">Sender is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Receiver</mat-label>
+        <input matInput id="receiver" formControlName="receiver" placeholder="Enter the receiver's name" />
+        <mat-error *ngIf="messageForm.get('receiver')?.hasError('required')">Receiver is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Content</mat-label>
+        <textarea matInput id="content" formControlName="content" placeholder="Enter the message content"></textarea>
+        <mat-error *ngIf="messageForm.get('content')?.hasError('required')">Content is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Timestamp</mat-label>
+        <input matInput id="timestamp" formControlName="timestamp" [value]="messageForm.get('timestamp')?.value | date: 'yyyy-MM-ddTHH:mm'" type="datetime-local" />
+        <mat-error *ngIf="messageForm.get('timestamp')?.hasError('required')">Timestamp is required</mat-error>
+      </mat-form-field>
+  
+      <mat-checkbox formControlName="processed">Message Processed</mat-checkbox>
+  
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="messageForm.invalid">Update Message</button>
+      </div>
+    </form>
+  </div>
+  

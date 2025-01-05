@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Update Partner</h1>
+<div mat-dialog-content>
+  <form [formGroup]="partnerForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Alias</mat-label>
+      <input matInput formControlName="alias" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="MESSAGE">MESSAGE</mat-option>
+        <mat-option value="ALERTING">ALERTING</mat-option>
+        <mat-option value="NOTIFICATION">NOTIFICATION</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Direction</mat-label>
+      <mat-select formControlName="direction">
+        <mat-option value="INBOUND">INBOUND</mat-option>
+        <mat-option value="OUTBOUND">OUTBOUND</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Application</mat-label>
+      <input matInput formControlName="application" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Processed Flow Type</mat-label>
+      <mat-select formControlName="processedFlowType">
+        <mat-option value="MESSAGE">MESSAGE</mat-option>
+        <mat-option value="ALERTING">ALERTING</mat-option>
+        <mat-option value="NOTIFICATION">NOTIFICATION</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="updatePartner()">Save</button>
+</div>

@@ -2,25 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, MatCardTitle } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router'; // Import RouterModule
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MessageService } from '../../../../services/message-service.service';
 import { Message } from '../../../../model/message.model';
-import { MatTableModule } from '@angular/material/table';
-import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MessageDetailsComponent } from '../message-details/message-details.component';
-import { MatDialog } from '@angular/material/dialog';
 import { MessageAddComponent } from '../message-add/message-add.component';
+import { MessageUpdateComponent } from '../message/message-update/message-update.component';
 
 @Component({
   selector: 'app-message-list',
   standalone: true,
-  imports: [CommonModule, MatCardModule, HttpClientModule,MatCardModule,MatTableModule,MatButtonModule,MatCardTitle], 
+  imports: [
+    CommonModule,
+    MatCardModule,
+    HttpClientModule,
+    MatTableModule,
+    MatButtonModule,
+    MatCardTitle,
+    RouterModule, // Add RouterModule here
+  ],
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css'],
 })
 export class MessageListComponent implements OnInit {
   messages: Message[] = [];
 
-  constructor(private messageService: MessageService,public dialog: MatDialog) {}
+  constructor(private messageService: MessageService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.messageService.getMessages().subscribe(
@@ -33,25 +43,24 @@ export class MessageListComponent implements OnInit {
       }
     );
   }
-  
+
   openMessageDetails(message: any): void {
     this.dialog.open(MessageDetailsComponent, {
       width: '500px',
-      data: { message: message } // Passe l'objet message au composant de détails
+      data: { message: message }, // Pass the message object to the details component
     });
   }
-  openAddMessageDialog(): void {
-    const dialogRef = this.dialog.open(MessageAddComponent, {
-      width: '500px'
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
+  openAddMessageDialog(): void {
+    const dialogRef = this.dialog.open(MessageAddComponent, { width: '500px' });
+
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Traitez le résultat après la fermeture du dialogue, comme ajouter le message à la liste
         this.messages.push(result);
       }
     });
   }
+
   loadMessages() {
     this.messageService.getMessages().subscribe(
       (response) => {
@@ -62,13 +71,13 @@ export class MessageListComponent implements OnInit {
       }
     );
   }
-  // Supprimer un message
+
   deleteMessage(id: number) {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) {
       this.messageService.deleteMessage(id).subscribe(
-        (response) => {
-          console.log('Message supprimé avec succès', response);
-          this.loadMessages(); // Actualiser la liste après la suppression
+        () => {
+          console.log('Message supprimé avec succès');
+          this.loadMessages(); // Refresh the list after deletion
         },
         (error) => {
           console.error('Erreur lors de la suppression du message', error);
@@ -76,5 +85,17 @@ export class MessageListComponent implements OnInit {
       );
     }
   }
-  
+
+  openMessageUpdate(message: any): void {
+    const dialogRef = this.dialog.open(MessageUpdateComponent, {
+      width: '500px',
+      data: { message: message }, // Pass the message to be updated
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadMessages(); // Reload the list after update
+      }
+    });
+  }
 }

@@ -3,6 +3,7 @@ import { MessageDetailsComponent } from "./features/features/message/message-det
 import { MessageListComponent } from "./features/features/message/message-list/message-list.component";
 import { PartnerListComponent } from "./features/features/partner/partner-list/partner-list.component";
 import { PartnerAddComponent } from "./features/features/partners/partner-add/partner-add.component";
+import { MessageUpdateComponent } from "./features/features/message/message/message-update/message-update.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: '/messages', pathMatch: 'full' },
@@ -10,4 +11,6 @@ export const routes: Routes = [
   { path: 'partners', component: PartnerListComponent },
   { path: 'message/:id', component: MessageDetailsComponent},
   { path: 'add-partner', component: PartnerAddComponent },
+  { path: 'message/update/:id', component: MessageUpdateComponent },
+  
 ];

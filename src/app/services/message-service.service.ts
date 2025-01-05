@@ -25,4 +25,10 @@ export class MessageService {
   deleteMessage(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/message/${id}`);
   }
+  // updateMessage(id: number, message: any): Observable<any> {
+  //   return this.http.put(`${this.apiUrl}/message/${id}`, message);
+  // }
+  updateMessage(id: number, message: Message): Observable<Message> {
+    return this.http.put<Message>(`${this.apiUrl}/message/${id}`, message);
+  }
 }

@@ -26,6 +26,8 @@ import { MessageAddComponent } from './features/features/message/message-add/mes
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PartnerUpdateComponent } from './features/partner/partner-update/partner-update.component';
+import { MessageUpdateComponent } from './features/features/message/message/message-update/message-update.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     PartnerListComponent,
     PartnerDetailsComponent,
     PartnerAddComponent,
-    MessageAddComponent
+    MessageAddComponent,
+    PartnerUpdateComponent,
+    MessageUpdateComponent
      // Composant déclaré ici
   ],
   imports: [
@@ -56,7 +60,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSelectModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   bootstrap: [AppComponent],
 })

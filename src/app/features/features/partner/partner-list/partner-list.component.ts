@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PartnerService } from '../../../../services/partner.service';
 import { PartnerDetailsComponent } from '../partner-details/partner-details.component';
+import { PartnerUpdateComponent } from '../../../partner/partner-update/partner-update.component';
 
 
 @Component({
@@ -54,5 +55,18 @@ export class PartnerListComponent implements OnInit {
       });
     }
   }
+  updatePartner(partner: any): void {
+    const dialogRef = this.dialog.open(PartnerUpdateComponent, {
+      width: '500px',
+      data: { partner: partner }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadPartners(); // Reload the list after update
+      }
+    });
+  }
+  
   
 }
