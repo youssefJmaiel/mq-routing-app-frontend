@@ -18,9 +18,13 @@ Angular 17 frontend for Message Router System.
 npm install
 
 2. Start the Angular development server:
+
+```bash
 ng serve
 
 3. Open your browser:
+
+```bash
 http://localhost:4200
 
 ## 👨‍💻 Author
