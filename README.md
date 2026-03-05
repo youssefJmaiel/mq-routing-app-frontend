@@ -1,33 +1,28 @@
-# 🖥 Frontend – Message Router
+🖥 Frontend – Message Router
 
 Angular 17 frontend for Message Router System.
 
-## 🔹 Features
+🔹 Features
 
-- Dashboard for messages
-- Partner management
-- Message details popup
-- Pagination & sorting
-- Token-based authentication (Keycloak)
+Dashboard for messages
 
-## 🏃‍♂️ Run Frontend Locally
+Partner management
 
-1. Install dependencies:
+Message details popup
 
-```bash
+Pagination & sorting
+
+Token-based authentication (Keycloak)
+
+🏃‍♂️ Run Frontend Locally
+
+Install dependencies:
 npm install
 
-2. Start the Angular development server:
-
-```bash
+Start the Angular development server:
 ng serve
 
-3. Open your browser:
-
-```bash
+Open your browser:
 http://localhost:4200
 
-## 👨‍💻 Author
-
-Youssef Jmaiel  
-Software Engineer – Spring Boot & Angular Developer
+Make sure the backend is running and accessible at the API URL defined in environment.ts.
