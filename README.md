@@ -1,9 +1,3 @@
-
----
-
-# 🔹 Exemple README **frontend**
-
-```markdown id="r7n9s1"
 # 🖥 Frontend – Message Router
 
 Angular 17 frontend for Message Router System.
@@ -16,11 +10,18 @@ Angular 17 frontend for Message Router System.
 - Pagination & sorting
 - Token-based authentication (Keycloak)
 
-## 🐳 Run Frontend with Docker
+## 🏃‍♂️ Run Frontend Locally
+
+1. Install dependencies:
 
 ```bash
-docker build -t message-router-frontend .
-docker run -p 4200:4200 message-router-frontend
+npm install
+
+2. Start the Angular development server:
+ng serve
+
+3. Open your browser:
+http://localhost:4200
 
 ## 👨‍💻 Author
 
